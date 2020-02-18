@@ -1,0 +1,50 @@
+.container-fluid {
+    max-width: 800px;
+}
+
+#logout-wrapper {
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+
+#chat-wrapper {
+    padding-left: 15px;
+}
+
+#chat-window {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+#chat {
+    list-style-type: none;
+    padding: 0;
+    max-height: 250px;
+}
+
+#chat li {
+    border-radius: 20px;
+    border: 1px solid gray;
+    margin: 2px;
+    padding: 2px 10px;
+    background-color: white;
+}
+
+#highscore-wrapper ul {
+    background-color: honeydew;
+    padding-right: 15px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    max-height: 300px;
+    list-style: none;
+    padding-left: 5px;
+}
+
+#highscore-wrapper li {
+    border-radius: 20px;
+    border: 1px solid gray;
+    margin: 2px;
+    padding: 2px 10px;
+    background-color: rgb(141, 235, 153);
+}

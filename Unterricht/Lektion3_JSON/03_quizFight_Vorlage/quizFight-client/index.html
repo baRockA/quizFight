@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quizFight</title>
+  </head>
+  <body>
+      <div id="login-wrapper">
+        <h1>Login</h1>
+        <form id="login-form">
+          Name:<input type="text" id="input-name"><br>
+          E-Mail:<input type="email" id="input-mail"><br>
+          <button id="button-login">Login</button>
+        </form>
+      </div>
+        <div class="quiz-wrapper">
+            <header>
+              <span id="player-name"></span>
+              <br>Score:<span id="score"></span>
+            </header>
+            <div class="game-controls">
+              <div id="question"></div>
+              <div id="answer-a"></div>
+              <div id="answer-b"></div>
+              <div id="answer-c"></div>
+              <div id="answer-d"></div>
+            </div>
+            <div class="chat-controls">
+              <h1>Chat</h1>
+              <ul id="chat"></ul>
+                <form id="chat-form">
+                    <input id="chat-input">
+                    <button>Send</button>
+                </form>
+            </div>
+        </div>
+        <div id="highscore-wrapper">
+          <h1>Highscore</h1>
+          <ul id="highscore"></ul>
+        </div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/client.js"></script>
+  </body>
+</html>
