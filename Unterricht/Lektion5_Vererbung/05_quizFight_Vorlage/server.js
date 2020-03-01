@@ -1,14 +1,12 @@
 'use strict';
 
-//Lektion 4 Zusatzaufgabe:(1) Player Klasse einbinden
-const Player = require('./player');
-//Lektion 4 Zusatzaufgabe:(2) Message Klasse einbinden
-const Message = require('./quizFight-client/js/message');
-
 // Einbinden der benötigten Bibliotheken
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
+//eigene Klassen einbinden
+const Player = require('./player');
+const Message = require('./quizFight-client/js/message');
 const RPSDuel = require('./rps-duel');
 
 let app = express();
@@ -34,7 +32,6 @@ function showReady() {
 }
 
 function connected(sock) {
-    //Lektion 4 Zusatzaufgabe:(2) Message Klasse verwenden
     let msg = new Message('Server', 'Verbindung zum Server aufgebaut, Bitte anmelden.');
     //Start-Message "msg" zum verbundenen Client schicken.
     sock.emit('msg', JSON.stringify(msg));
@@ -63,13 +60,12 @@ function serverError(err) {
 function onLogin(sock, data) {
     let p = JSON.parse(data);
     for (let i = 0; i < lobby.length; i++) {
-        //Lektion 4 Zusatzaufgabe: Vereinfachen wegen Player-Klasse
         if (lobby[i].name === p.name) {
             sock.emit('logout', 'Name bereits vorhanden. Bitte erneut einloggen!');
             return 0;
         }
     }
-    //Lektion 4 Zusatzaufgabe:(1) Objekt der Player-Klasse instanziieren
+    //Objekt der Player-Klasse instanziieren und zur Lobby hinzufügen
     let player = new Player(sock, p);
     lobby.push(player);
     //Nach jedem Login wird der Highscore neu versendet
@@ -80,7 +76,6 @@ function onLogin(sock, data) {
 function onLogout(p) {
     let player = JSON.parse(p);
     for (let i = 0; i < lobby.length; i++) {
-        //Lektion 4 Zusatzaufgabe: Änderung wegen Player-Klasse
         if (player.name === lobby[i].name) {
             lobby.splice(i, 1);
         }
@@ -92,7 +87,6 @@ function onLogout(p) {
 function broadcastHighscore() {
     let highscore = [];
     for (let i = 0; i < lobby.length; i++) {
-        //Lektion 4 Zusatzaufgabe: Änderung wegen Player-Klasse
         highscore.push({ name: lobby[i].name, score: lobby[i].score });
     }
     io.emit('highscore', JSON.stringify(highscore));
@@ -102,7 +96,6 @@ function broadcastHighscore() {
 function sendMessage(data) {
     let msg = JSON.parse(data);
     for (let i = 0; i < lobby.length; i++) {
-        //Lektion 4 Zusatzaufgabe: Änderung wegen Player-Klasse
         if (msg.from === lobby[i].name) {
             io.emit('msg', data);
             return 0;
@@ -115,13 +108,12 @@ function sendMessage(data) {
 function onChallenge(data) {
     let turn = JSON.parse(data);
     let p1, p2 = null;
-    //Lektion 4 Zusatzaufgabe:(2) Instanz der Message Klasse erzeugen
+    //Instanz der Message Klasse erzeugen für Antwort
     let reply = new Message('Server', '');
     let chal = getChallenge(turn.player1, turn.player2, turn.game);
 
     //Suchen der Spieler anhand ihres Namens in der lobby
     for (let i = 0; i < lobby.length; i++) {
-        //Lektion 4 Zusatzaufgabe: Änderung wegen Player-Klasse
         if (turn.player1 === lobby[i].name) {
             p1 = lobby[i];
         } else if (turn.player2 === lobby[i].name) {
@@ -144,7 +136,7 @@ function onChallenge(data) {
             //Schere-Stein-Papier Zug gemacht
             chal.game.makeTurn(turn.player1, turn.turn);
             challenges.splice(challenges.indexOf(chal), 1);
-            //Zusatzaufgabe Lektion 4: verteilen der neuen Highscore-Liste
+            //verteilen der neuen Highscore-Liste
             broadcastHighscore();
             return 0;
         }

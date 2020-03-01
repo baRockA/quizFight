@@ -11,7 +11,7 @@ sock.on('logout', onLogout);
 //Empfangen der Highscore-Liste und Aufruf der Ausgabefunktion
 sock.on('highscore', showHighscore);
 
-//Zusatzaufgabe Lektion 4:(3) Auf challenge-Events reagieren
+//Auf challenge-Events reagieren
 sock.on('challenge', onChallenge);
 
 //Definition der Event-Listener der Benutzerschnittstelle
@@ -74,7 +74,7 @@ function sendMessage(ev) {
     //Input-Feld leeren
     input.value = '';
 
-    //Zusatzaufgabe Lektion 4:(2) Message Klasse beim Client einbinden und instanziieren
+    //Message Klasse beim Client einbinden und instanziieren
     //Message über socket zum Server schicken
     let msg = new Message(player.name, value);
     sock.emit('msg', JSON.stringify(msg));
@@ -102,7 +102,7 @@ function showHighscore(data) {
         let el = document.createElement('li');
         el.innerHTML = highscore[i].name + ": " + highscore[i].score;
 
-        //Zusatz zur Zusatzaufgabe Lektion 4: eigenen Spieler im Highscore hervorheben
+        //eigenen Spieler im Highscore hervorheben
         if (highscore[i].name !== player.name) {
             //Erweiterung des Highscores zur Herausforderung eines Spielers bzw. zum annehmen einer Herausforderung.
             el.setAttribute("data-toggle", "modal");
@@ -112,7 +112,6 @@ function showHighscore(data) {
         } else {
             el.setAttribute("id", "myScore");
         }
-
         list.appendChild(el);
     }
 }
@@ -136,11 +135,11 @@ function sendRPSTurn(event) {
         let myturn = { player1: player.name, player2: challengedPlayer, turn: event.target.id, game: "rps" };
         sock.emit('challenge', JSON.stringify(myturn));
     }
-    //Lektion 4 Zusatzaufgabe a.): Ausblenden des modalen Dialogs von Bootstrap nach Auswahl
+    //Ausblenden des modalen Dialogs von Bootstrap nach Auswahl
     $('#challengeMenu').modal('hide');
 }
 
-// Zusatzaufgabe Lektion 4:(3) auf challenge-Event vom Server reagieren
+//auf challenge-Event vom Server reagieren
 function onChallenge(data) {
     let msg = JSON.parse(data);
     switch (msg.status) {

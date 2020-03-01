@@ -1,4 +1,4 @@
-//Zusatzaufgabe Lektion 4:(2) Klasse für Nachrichten
+//Klasse für Nachrichten
 class Message {
     constructor(s, t) {
         this.from = s;

@@ -1,4 +1,4 @@
-//Zusatzaufgabe Lektion 4:(1) Klasse für Spieler mit Attribut für Socket
+//Klasse für Spieler mit Attribut für Socket
 class Player {
     constructor(socket, player) {
         this.socket = socket;
