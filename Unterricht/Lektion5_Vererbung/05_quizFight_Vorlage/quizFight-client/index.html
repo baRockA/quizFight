@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quizFight</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link href="css/default.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+                    <div id="logout-wrapper" class="row">
+                        <div class="col-sm-2"><span id="player-name"></span></div>
+                        <button id="button-logout" class="btn btn-primary my-2 my-sm-0">Logout</button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div id="login-wrapper">
+                            <form class="form-inline" id="login-form">
+                                <input class="form-control mr-sm-2" type="text" id="input-name" placeholder="Name" />
+                                <input class="form-control mr-sm-2" type="email" id="input-mail" placeholder="E-Mail" />
+                                <button class="btn btn-primary my-2 my-sm-0" type="submit" id="button-login">
+                  Login
+                </button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8" id="chat-wrapper">
+                <div class="jumbotron" id="chat-window">
+                    <ul id="chat"></ul>
+                </div>
+                <form id="chat-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="chat-input" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+            Send
+          </button>
+                </form>
+            </div>
+            <div class="col-md-4" id="highscore-wrapper">
+                <ul id="highscore"></ul>
+            </div>
+        </div>
+        <!-- Zusatzaufgabe Lektion 4:(3) Nachricht challenge vom Server-->
+        <div id="gamemsg" class="jumbotron">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="challengeMenu" tabindex="-1" role="dialog" aria-labelledby="challengeMenuTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="challengeMenuTitle">Herausforderung <span id="challengedPlayerName"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                              Stein-Schere-Papier
+                            </a>
+                            </div>
+                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row" id="rps-controls">
+                                        <div class="col-md-4">
+                                            <img src="img/rock.png" id="rock" class="img-fluid" alt="Stein">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="img/scissors.png" id="scissors" class="img-fluid" alt="Schere">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="img/paper.png" id="paper" class="img-fluid" alt="Papier">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- Zusatzaufgabe Lektion 4:(2) Message.js einbinden-->
+        <script src="js/message.js"></script>
+        <script src="js/client.js"></script>
+</body>
+
+</html>
